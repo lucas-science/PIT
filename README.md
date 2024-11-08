@@ -4,8 +4,8 @@ Le Hacker lui a laissé des indices pour pouvoir retrouver ses données décrypt
 
 ### Comment jouer ?
 * pour commencer, faites la commande : ```sudo ./start.sh```
-* un fichier `message_du_h@cker` va apparaître, on retrouvera dans ce dernier à la fin un message avec l'indice qui y est donné
-* Le fichier `AIDE` permet d'avoir des explication essentiel pour résoudre l'énigme
+* un fichier `message_du_h@cker` va apparaître, on retrouvera dans ce dernier, à la fin, un message avec l'indice qui y est donné
+* Le fichier `AIDE` permet d'avoir des explications essentiels pour résoudre l'énigme.
 
 
 ### Solution
