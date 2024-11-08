@@ -1,0 +1,3 @@
+Pour retrouver le nom du fichier, trouve le PID du virus.
+Cherche dans le texte la ligne où se trouve le PID, tu verras affiché en majuscule le nom du fichier.
+Trouve le répertoire où se cache ce fichier (parmi dir1, dir2, dir3, etc.).

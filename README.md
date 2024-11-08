@@ -14,5 +14,3 @@ Le Hacker lui a laisé des indices pour pouvoir retrouver ses données décrypt�
 * on cherche le fichier pizza : ``find -name 'PIZZA'`
 * on cherche le groupe qui à accès au script de fin : `ls -l`=> on remarque que c'est 'groupeDesH@ckers'
 * on fini le jeux en éxecutant : ``./decrypte.sh groupeDesH@ckers`
-
-# PIT
