@@ -1,6 +1,6 @@
 # PIT - JEUX ligne de commande en bash
 Dans ce mini jeux on va pouvoir incarner un personnage qui s'est fait piraté.
-Le Hacker lui a laisé des indices pour pouvoir retrouver ses données décryptés. 
+Le Hacker lui a laissé des indices pour pouvoir retrouver ses données décryptés. 
 
 ### Comment jouer ?
 * pour commencer, faites la commande : ```sudo ./start.sh```
