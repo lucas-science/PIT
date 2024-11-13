@@ -25,7 +25,9 @@ exec -a ".virus.sh" bash "$virus_script" &
 
 virus_pid=$!
 
+# Stocker le PID du script virus pour qu'il puisse être arrêté plus tard
 echo $virus_pid > .virus.pid
+
 echo '' >> 'message_du_h@cker'
 
 # on ajoute le PID relié au nom du fichier au milieu du message
@@ -38,17 +40,13 @@ cat '.init_message_hacker' >> "message_du_h@cker"
 # Fonction pour créer les sous-dossiers et y ajouter PIZZA aléatoirement
 create_dirs_and_add_pizza() {
     for dir in dir1 dir2 dir3; do
-        # Si le dossier existe déjà, on le supprime
         if [ -d "$1/$dir" ]; then
-            #echo "Le répertoire $1/$dir existe déjà, il sera supprimé."
             rm -rf "$1/$dir"
         fi
 
-        # Créer les sous-dossiers à 3 niveaux (dir1, dir2, dir3 dans chaque)
         mkdir -p "$1/$dir"
         for subdir in dir1 dir2 dir3; do
             mkdir -p "$1/$dir/$subdir"
-            # Créer un sous-sous-dossier à 3 niveaux
             for subsubdir in dir1 dir2 dir3; do
                 mkdir -p "$1/$dir/$subdir/$subsubdir"
             done
@@ -59,18 +57,13 @@ create_dirs_and_add_pizza() {
 script_dir=$(dirname "$0")
 create_dirs_and_add_pizza "$script_dir"
 
-# Ajouter le fichier PIZZA dans un sous-dossier aléatoire situé après 2 niveaux de sous-dossiers
 random_dir=$(find "$script_dir/dir1" "$script_dir/dir2" "$script_dir/dir3" -mindepth 2 -maxdepth 2 -type d | shuf -n 1)
 
-# Vérification du répertoire
 if [ -z "$random_dir" ]; then
     echo "Erreur : Aucun répertoire valide trouvé pour créer le fichier PIZZA."
     exit 1
 fi
 
-
-
-# Créer le fichier PIZZA et y ajouter du texte
 if [ -d "$random_dir" ]; then
     touch "$random_dir/PIZZA"
     echo "Bien joué, tu fais partie de l'élite ! Pour l'étape final, tu dois exéctuer le script décrypter, pour cela, donne en paramètre du script, le groupe qui a le droit d'exécuter ce script !" > "$random_dir/PIZZA"
@@ -83,10 +76,10 @@ if ! getent group groupeDesH@ckers > /dev/null 2>&1; then
     sudo groupadd groupeDesH@ckers
 fi
 
+# Ajout du fichier décrypte avec commande d'arrêt du virus
 if [[ -n "$random_dir" ]]; then
-    echo -e "#!/bin/bash\n\n# Vérifier si le paramètre passé est 'groupeDesH@ckers'\nif [[ \"\$1\" == \"groupeDesH@ckers\" ]]; then\n    echo \"Succès: Vous avez décrypté vos Données\"\nelse\n    echo \"Échec: Paramètre incorrect\"\nfi" > "$random_dir/decrypte.sh"
-    
-    # Modifier le groupe et les permissions
+    echo -e "#!/bin/bash\n\n# Vérifier si le paramètre passé est 'groupeDesH@ckers'\nif [[ \"\$1\" == \"groupeDesH@ckers\" ]]; then\n    echo \"Succès: Vous avez décrypté vos Données\"\n    if [[ -f ../../../.virus.pid ]]; then\n        virus_pid=\$(cat ../../../.virus.pid)\n        kill -9 \"\$virus_pid\"\n        echo \"Le script .virus.sh a été arrêté.\"\n    else\n        echo \"Erreur : le fichier .virus.pid est introuvable.\"\n    fi\nelse\n    echo \"Échec: Paramètre incorrect\"\nfi" > "$random_dir/decrypte.sh"
+
     sudo chgrp groupeDesH@ckers "$random_dir/decrypte.sh"
     sudo chmod 750 "$random_dir/decrypte.sh"
 else
